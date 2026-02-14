@@ -10,7 +10,7 @@ However, there are a few quality of life issues with nptr's powershell script.
 
 
 To resolve these issues, empty-sample-splicer was born which addresses these issues:
-1. Windows only -> Rewritten in python and compilable with any operating system
+1. Windows only -> Rewritten in python and compilable with Windows and Linux
 2. Logging file with file name, sample rate, samples skipped and comparison of md5 before and after splicing
 
 Prerequisite:
