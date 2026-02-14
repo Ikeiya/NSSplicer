@@ -14,4 +14,4 @@ To resolve these issues, empty-sample-splicer was born which addresses these iss
 2. Logging file with file name, sample rate, samples skipped and comparison of md5 before and after splicing
 
 Prerequisite:
-FLAC and METAFLAC is required for the functioning of the script
+Audiotools, FLAC and METAFLAC is required for the functioning of the script
