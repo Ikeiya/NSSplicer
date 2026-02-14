@@ -1,5 +1,3 @@
-import audiotools
-import subprocess
 import logging
 import os
 import sys
@@ -28,8 +26,7 @@ def trackInfo(flacInDirectory):
     trackMetadata = []
     for file in flacInDirectory:
         skip = 0
-        track = audiotools.open(file)
-        sampleRate = track.sample_rate()
+        sampleRate = int(os.popen("metaflac --show-sample-rate "+file).read())
         if sampleRate == 44100:
             skip = 286
         elif sampleRate == 48000:
@@ -38,9 +35,9 @@ def trackInfo(flacInDirectory):
             skip = 624
         elif sampleRate == 192000:
             skip = 1248
-        metadata = track.get_metadata()
-        rawHash = metadata.get_block(audiotools.flac.Flac_STREAMINFO.BLOCK_ID).md5sum
-        trackMetadata.append([file, sampleRate, skip, audiotools.hex_string(rawHash)])
+        md5sum = os.popen("metaflac --show-md5sum "+file).read()
+        trackMetadata.append([file, sampleRate, skip, md5sum])
+    print(trackMetadata)
     return trackMetadata
 
 def PCMsplice(trackMetadata):
@@ -58,11 +55,11 @@ def main(debugList):
     flacInDirectory = read_file()
     trackMetadata = trackInfo(flacInDirectory)
     for track in trackMetadata:
-        debugList.append("Files before splice: "+"filename-"+str(track[0])+"sampleRate-"+str(track[1])+"skip-"+str(track[2])+"md5-"+str(track[3]))
+        debugList.append("Files before splice: "+" filename-"+str(track[0])+" sampleRate-"+str(track[1])+" skip-"+str(track[2])+" md5-"+str(track[3]))
     skipLog = PCMsplice(trackMetadata)
     trackMetadata = trackInfo(flacInDirectory)
     for track in trackMetadata:
-        debugList.append("Files after splice:"+"filename-"+str(track[0])+"sampleRate-"+str(track[1])+"skip-"+str(track[2])+"md5-"+str(track[3]))
+        debugList.append("Files after splice: "+"filename-"+str(track[0])+" sampleRate-"+str(track[1])+" skip-"+str(track[2])+" md5-"+str(track[3]))
     return debugList
 
 main(debugList)
