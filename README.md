@@ -1,4 +1,4 @@
-# Empty-sample-splicer
+# ESSplicer (Empty-Sample-Splicer)
 
 When obtaining Amazon Music's Hi-res FLAC files from certain sources, the md5 of the obtained file is not identical with Hi-res FLAC files from other sources. This is a result of empty samples in the audio sample of the file, which must be removed for the file to be "bit-perfect".
 
