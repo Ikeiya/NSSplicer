@@ -9,7 +9,7 @@ However, there are a few quality of life issues with nptr's powershell script.
 2. No log file to verify samples are actually skipped
 
 
-To resolve these issues, empty-sample-splicer was born which addresses these issues:
+To resolve these issues, null-sample-splicer was born which addresses these issues:
 1. Windows only -> Rewritten in python and compilable with Windows and Linux
 2. Logging file with file name, sample rate, samples skipped and comparison of md5 before and after splicing
 
